@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 class EmailAuthBackend(object):
     """
-    Авторизация используя почтовый ящик.
+    Авторизация используя email пользователя
     """
 
     def authenticate(self, request, username=None, password=None):

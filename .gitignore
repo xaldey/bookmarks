@@ -130,5 +130,6 @@ dmypy.json
 .pyre/
 
 # Ignore private
-.env
 client_secret_236952589444-5727mgg8h1n3b4m8ngumd05e8aebljae.apps.googleusercontent.com.json
+cert.crt
+cert.key
