@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
-{% block title %}Log-in{% endblock %}
+{% block title %}Вход{% endblock %}
 
 {% block content %}
-  <h1>Log-in</h1>
+  <h1>Вход</h1>
   {% if form.errors %}
     <p>
       Имя пользователя и пароль не опознаны.
@@ -17,15 +17,15 @@
       {{ form.as_p }}
       {% csrf_token %}
       <input type="hidden" name="next" value="{{ next }}" />
-      <p><input type="submit" value="Log-in"></p>
+      <p><input type="submit" value="Войти"></p>
     </form>
     <p><a href="{% url 'password_reset' %}">Забыли пароль?</a></p>
   </div>
-  <div>
-  <ul>
-    <li class="google">
-      <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a>
-    </li>
-  </ul>
+  <div class="social">
+    <ul>
+      <li class="google">
+        <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a>
+      </li>
+    </ul>
   </div>
 {% endblock %}
