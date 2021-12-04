@@ -16,7 +16,7 @@
     jQuery('head').append(css);
 
     // load HTML
-    box_html = '<div id="bookmarklet"><a href="#" id="close">&times;</a><h1>Select an image to bookmark:</h1><div class="images"></div></div>';
+    box_html = '<div id="bookmarklet"><a href="#" id="close">&times;</a><h1>Выбери картинку для сохранения:</h1><div class="images"></div></div>';
     jQuery('body').append(box_html);
 
     // close event
@@ -41,6 +41,19 @@
       jQuery('#bookmarklet').hide();
       // open new window to submit the image
       window.open(site_url +'images/create/?url='
+                  + encodeURIComponent(selected_image)
+                  + '&title='
+                  + encodeURIComponent(jQuery('title').text()),
+                  '_blank');
+    });
+
+    // when an image is selected open URL with it
+    jQuery('#bookmarklet .images a').click(function(e){
+      selected_image = jQuery(this).children('img').attr('src');
+      // hide bookmarklet
+      jQuery('#bookmarklet').hide();
+      // open new window to submit the image
+      window.open(site_url + 'images/create/?url='
                   + encodeURIComponent(selected_image)
                   + '&title='
                   + encodeURIComponent(jQuery('title').text()),
