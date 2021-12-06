@@ -86,11 +86,13 @@ def user_login(request):
 
 @login_required
 def user_list(request):
-    users = User.objects.filter(is_active=True)
+    # (2021-12-06) После вывода ошибки принял решение поменять код
+    # users = User.objects.filter(is_active=True)
+    profiles = Profile.objects.all()
     return render(request,
                   'account/user/list.html',
                   {'section': 'people',
-                   'users': users})
+                   'profiles': profiles})
 
 
 @login_required
