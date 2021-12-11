@@ -13,4 +13,10 @@
       <a href="javascript:{% include 'bookmarklet_launcher.js' %}" class="button">В закладки</a></p>
     <p>Можете <a href="{% url 'edit' %}">отредактировать</a> ваш профиль
       или <a href="{% url 'password_change' %}">сменить ваш пароль</a>.</p>
+  <h2>Последние события</h2>
+  <div id="action-list">
+    {% for action in actions %}
+      {% include "actions/action/detail.html" %}
+    {% endfor %}
+  </div>
 {% endblock %}
