@@ -16,6 +16,9 @@
         <span class="count">
           Лайков <span class="total">{{ total_likes }}</span>
         </span>
+        <span class="count">
+          Просмотров {{ total_views }}
+        </span>
         <a href="#" data-id="{{ image.id }}"
                     data-action="{% if request.user in users_like %}un{% endif %}like"
                     class="like button">
