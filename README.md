@@ -1,6 +1,6 @@
 # bookmarks
-https://github.com/PacktPublishing/Django-3-by-Example
-Social website project
+### https://github.com/PacktPublishing/Django-3-by-Example
+### Social website project
 Проект позволяет пользователям авторизоваться на сайте, 
 после этого сделать себе кнопку в закладках и находясь на любом другом сайте с картинками, 
 нажав на эту самую кнопку-закладку выбрать в появившемся списке картинок, находящихся на сайте, выбрать себе
