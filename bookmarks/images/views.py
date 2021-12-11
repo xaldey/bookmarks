@@ -13,11 +13,10 @@ from actions.utils import create_action
 from .forms import ImageCreateForm
 from .models import Image
 
-
 # connect to redis
 r = redis.Redis(host=settings.REDIS_HOST,
-          port=settings.REDIS_PORT,
-          db=settings.REDIS_DB)
+                port=settings.REDIS_PORT,
+                db=settings.REDIS_DB)
 
 
 @login_required
@@ -51,6 +50,8 @@ def image_detail(request, id, slug):
     image = get_object_or_404(Image, id=id, slug=slug)
     # увеличить кол-во просмотров на 1
     total_views = r.incr(f'image:{image.id}:views')
+    # увеличим рейтинг картинки на 1
+    r.zincrby('image_rating', 1, image.id)
     return render(request,
                   'images/image/detail.html',
                   {'section': 'images',
@@ -103,3 +104,17 @@ def image_create(request):
                   'images/image/create.html',
                   {'section': 'images',
                    'form': form})
+
+
+@login_required
+def image_ranking(request):
+    # get image ranking dictionary
+    image_ranking = r.zrange('image_ranking', 0, -1, desc=True)[:10]
+    image_ranking_ids = [int(id) for id in image_ranking]
+    # get most viewed images
+    most_viewed = list(Image.objects.filter(id__in=image_ranking_ids))
+    most_viewed.sort(key=lambda x: image_ranking_ids.index(x.id))
+    return render(request,
+                  'images/image/ranking.html',
+                  {'section': 'images',
+                   'most_viewed': most_viewed})
